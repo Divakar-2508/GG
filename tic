@@ -1,0 +1,135 @@
+import os
+import random
+import time
+
+board=[" "," "," "," "," "," "," "," "," "]
+def result():
+    global b
+    if (board[0]=='x' and board[1]=='x' and board[2]=='x') or \
+        (board[3]=='x' and board[4]=='x' and board[5]=='x') or \
+        (board[6]=='x' and board[7]=='x' and board[8]=='x') or \
+        (board[0]=='x' and board[3]=='x' and board[6]=='x') or \
+        (board[1]=='x' and board[4]=='x' and board[7]=='x') or \
+        (board[2]=='x' and board[5]=='x' and board[8]=='x') or \
+        (board[0]=='x' and board[4]=='x' and board[8]=='x') or \
+        (board[2]=='x' and board[4]=='x' and board[6]=='x'):
+        os.system('cls')
+        board_dis()
+        print("U won")
+        b=10
+        time.sleep(5)
+        quit()
+    elif (board[0]=='o' and board[1]=='o' and board[2]=='o') or \
+        (board[3]=='o' and board[4]=='o' and board[5]=='o') or \
+        (board[6]=='o' and board[7]=='o' and board[8]=='o') or \
+        (board[0]=='o' and board[3]=='o' and board[6]=='o') or \
+        (board[1]=='o' and board[4]=='o' and board[7]=='o') or \
+        (board[2]=='o' and board[5]=='o' and board[8]=='o')or \
+        (board[0]=='o' and board[4]=='o' and board[8]=='o') or \
+        (board[2]=='o' and board[4]=='o' and board[6]=='o'):
+        print("You lose")
+        b=10
+    else:
+        if " " not in board:
+            b=10
+            print("Tie")
+def ai_move():
+    global ai
+    #index of 1st place
+    if(board[0]=='x' and board[2]=='x') or \
+    (board[4]=='x' and board[7]=='x') or \
+    (board[0]=='o' and board[2]=='o') or \
+    (board[4]=='o' and board[7]=='o'):
+        board[1]='o'
+    #index of 0th place
+    elif(board[1]=='x' and board[2]=='x') or \
+    (board[4]=='x' and board[8]=='x') or \
+    (board[3]=='x' and board[6]=='x') or \
+    (board[1]=='o' and board[2]=='o') or \
+    (board[4]=='o' and board[8]=='o') or \
+    (board[3]=='o' and board[6]=='o'):
+        board[0]='o'
+    elif(board[0]=='x' and board[1]=='x') or \
+    (board[5]=='x' and board[8]=='x') or \
+    (board[4]=='x' and board[6]=='x') or \
+    (board[0]=='o' and board[1]=='o') or \
+    (board[5]=='o' and board[6]=='o') or \
+    (board[4]=='o' and board[8]=='o'):
+        board[2]='o'
+    elif(board[0]=='x' and board[6]=='x') or \
+    (board[4]=='x' and board[5]=='x') or \
+    (board[0]=='o' and board[6]=='o') or \
+    (board[4]=='o' and board[5]=='o'):
+        board[3]=='o'
+    elif(board[1]=='x' and board[7]=='x') or \
+    (board[2]=='x' and board[5]=='x') or \
+    (board[0]=='x' and board[8]=='x') or \
+    (board[2]=='x' and board[6]=='x') or \
+    (board[1]=='o' and board[7]=='o') or \
+    (board[2]=='o' and board[5]=='o') or \
+    (board[0]=='o' and board[8]=='o') or \
+    (board[2]=='o' and board[6]=='o'):
+        board[4]=='o'
+    elif(board[2]=='x' and board[8]=='x') or \
+    (board[3]=='x' and board[4]=='x') or \
+    (board[2]=='o' and board[8]=='o') or \
+    (board[3]=='o' and board[4]=='o'):
+        board[5]=='o'
+    elif(board[0]=='x' and board[3]=='x') or \
+    (board[7]=='x' and board[8]=='x') or \
+    (board[2]=='x' and board[4]=='x') or \
+    (board[0]=='o' and board[3]=='o') or \
+    (board[7]=='o' and board[8]=='o') or \
+    (board[2]=='o' and board[4]=='o'):
+        board[6]='o'
+    elif(board[1]=='x' and board[4]=='x') or \
+    (board[6]=='x' and board[8]=='x') or \
+    (board[1]=='o' and board[4]=='o') or \
+    (board[6]=='o' and board[8]=='o'):
+        board[7]='o'
+    elif(board[0]=='x' and board[4]=='x') or \
+    (board[6]=='x' and board[7]=='x') or \
+    (board[2]=='x' and board[5]=='x') or \
+    (board[0]=='o' and board[4]=='o') or \
+    (board[6]=='o' and board[7]=='o') or \
+    (board[2]=='o' and board[5]=='o'):
+        board[8]='o'
+    else:    
+        while ai>0:
+            ch=random.randint(1,9)
+            if board[ch-1]==" ":
+                board[ch-1]='o'
+                ai=ai-1
+          
+def board_dis():
+    print(board[0],"|",board[1],"|",board[2])
+    print("-","-","-","-","-",sep="-")
+    print(board[3],"|",board[4],"|",board[5])
+    print("-","-","-","-","-",sep="-")
+    print(board[6],"|",board[7],"|",board[8])
+def main(): 
+    global b
+    b=1
+    while b<=9:
+        global ai
+        ai=1
+        os.system('cls')
+        board_dis()
+        x=int(input("Enter pos: "))
+        if x>9:
+            print("invalid choice")
+            time.sleep(1)
+        elif x<=9:
+            if board[x-1]==" ":
+                board[x-1]='x'
+                b+=1
+            elif board[x]!=" ":
+                print("Place is already occupied")
+                time.sleep(1)      
+        
+        ai_move()          
+        result()                               
+    result()            
+main()                          
+
+
